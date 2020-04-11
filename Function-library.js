@@ -25,10 +25,6 @@ function ifPrime(x) {
     return true
 }
 
-var str = 'string';
-console.log(str.substring(0));
-console.log(str.substring(1, 0));
-
 //斐波那契数列
 function fibonacci(n) {
     let first = 1;
@@ -45,5 +41,46 @@ function fibonacci(n) {
     return third;
 }
 
+//防抖
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        let content = this; //保存this
+        let args = arguments; //保存arguments
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(content, args);
+        }, wait);
+    };
+}
 
+//节流（两种） 1.时间戳
+function throttle1(func, wait) {
+    let prev = 0;
+    return function () {
+        let content = this;
+        let args = arguments;
+        let now = +new Date();
+        if (now - prev > wait) {
+            func.apply(content, args);
+            prev = now;
+        }
+    };
+}
+
+//2.定时器
+function throttle2(func, wait) {
+    var context, args, timeout;
+    return function () {
+        context = this;
+        args = arguments;
+        if (!timeout) {
+            //如果定时器存在就不执行函数。
+            timeout = setTimeout(function () {
+                func.apply(context, args);
+                timeout = null;
+            }, wait);
+        }
+    };
+}
 
