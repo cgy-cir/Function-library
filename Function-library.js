@@ -84,3 +84,11 @@ function throttle2(func, wait) {
     };
 }
 
+//继承
+function inherit(origin, target) {
+    function F() { }
+    F.prototype = origin.prototype;
+    target.prototype = new F();
+    target.prototype.constructor = target;
+}
+
