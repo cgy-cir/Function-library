@@ -92,3 +92,39 @@ function inherit(origin, target) {
     target.prototype.constructor = target;
 }
 
+//浅复制
+function shallowCopy(obj) {
+    if (obj !== null && typeof obj == 'object') {
+        var newObj = obj instanceof Array ? [] : {};
+        for (let key in obj) {
+            newObj[key] = obj[key]
+        }
+    }
+    return newObj
+}
+
+//深复制
+function deepCopy(obj) {
+    if (typeof obj == 'object') {
+        var newObj = obj instanceof Array ? [] : {};
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object') {
+                    newObj[key] = deepCopy(obj[key])
+                } else {
+                    newObj[key] = obj[key]
+                }
+            }
+        }
+    }
+    return newObj
+}
+
+//数组去重
+function unique(arr) {
+    let res = arr.filter((item, index, array) => {
+        return arr.indexOf(item) == index
+    })
+    return res
+}
+
