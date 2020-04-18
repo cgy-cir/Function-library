@@ -128,3 +128,20 @@ function unique(arr) {
     return res
 }
 
+// 手写数组方法
+// push
+Array.prototype.push1 = function () {
+    for (let i = 0; i < arguments.length; i++) {
+        this[this.length] = arguments[i];
+    }
+    return this.length;
+};
+
+// forEach
+Array.prototype.forEach1 = function (fn, context) {
+    for (let i = 0; i < this.length; i++) {
+        fn.call(context, this[i], i, this);
+    }
+    return undefined;
+};
+
