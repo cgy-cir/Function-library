@@ -139,8 +139,9 @@ Array.prototype.push1 = function () {
 
 // forEach
 Array.prototype.forEach1 = function (fn, context) {
+    var _this = context ? context : this;
     for (let i = 0; i < this.length; i++) {
-        fn.call(context, this[i], i, this);
+        fn.call(_this, this[i], i, this);
     }
     return undefined;
 };
