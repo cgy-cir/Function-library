@@ -139,10 +139,56 @@ Array.prototype.push1 = function () {
 
 // forEach
 Array.prototype.forEach1 = function (fn, context) {
-    var _this = context ? context : this;
+    var _this = context ? context : window;
     for (let i = 0; i < this.length; i++) {
         fn.call(_this, this[i], i, this);
     }
     return undefined;
+};
+
+// map
+Array.prototype.map1 = function (fn, context) {
+    let _this = context ? context : window;
+    let arr = [];
+    for (let i = 0; i < this.length; i++) {
+        arr.push(fn.call(_this, this[i], i, this));
+    }
+    return arr;
+};
+
+//filter
+Array.prototype.filter1 = function (fn, context) {
+    let _this = context ? context : window;
+    let arr = [];
+    for (let i = 0; i < this.length; i++) {
+        if (fn.call(_this, this[i], i, this)) {
+            arr.push(this[i]);
+        }
+    }
+    return arr;
+};
+// some
+Array.prototype.some1 = function (fn, context) {
+    let _this = context ? context : window;
+    let passed = false;
+    for (let k = 0, length = this.length; k < length; k++) {
+        if (passed === true) break;
+        passed = !!fn.call(_this, this[k], k, this);
+    }
+    return passed;
+};
+//更新版 some，即使遇到返回 true 的项，也会继续执行之后的项。
+Array.prototype.some2 = function (fn, context) {
+    let _this = context ? context : window;
+    let arr = [];
+    let tag = false;
+    for (let i = 0; i < this.length; i++) {
+        arr.push(!!fn.call(_this, this[i], i, this));
+    }
+    for (let i = 0; i < arr.length; i++) {
+        tag = arr[i];
+        if (tag) break;
+    }
+    return tag;
 };
 
