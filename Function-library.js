@@ -137,6 +137,38 @@ Array.prototype.push1 = function () {
     return this.length;
 };
 
+//pop
+Array.prototype.pop1 = function () {
+    let last = this[this.length - 1]
+    this.length = this.length - 1
+    return last
+}
+
+//unshift
+Array.prototype.unshift1 = function () {
+    let length = arguments.length
+    for (let i = this.length; i > 0; i--) {
+        this[i - 1 + length] = this[i - 1]
+    }
+    for (let i = 0; i < arguments.length; i++) {
+        this[i] = arguments[i];
+    }
+    return this.length
+}
+
+//shift
+Array.prototype.shift1 = function () {
+    let first = this[0];
+    for (let i = 0; i < this.length; i++) {
+        this[i] = this[i + 1]
+    }
+    this.length = this.length - 2
+    return first
+}
+
+
+
+
 // forEach
 Array.prototype.forEach1 = function (fn, context) {
     var _this = context ? context : window;
