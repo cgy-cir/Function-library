@@ -166,6 +166,16 @@ Array.prototype.shift1 = function () {
     return first
 }
 
+//reverse
+Array.prototype.reverse1 = function () {
+    let arr = this.slice()
+    for (let i = 0; i < this.length; i++) {
+        this[i] = arr[this.length - 1 - i]
+    }
+    return this
+}
+
+
 
 
 
