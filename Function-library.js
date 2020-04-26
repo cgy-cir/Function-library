@@ -25,7 +25,7 @@ function ifPrime(x) {
     return true
 }
 
-//斐波那契数列
+//斐波那契数列 递推法
 function fibonacci(n) {
     let first = 1;
     let second = 1;
