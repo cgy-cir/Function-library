@@ -25,7 +25,7 @@ function ifPrime(x) {
     return true
 }
 
-//斐波那契数列 递推法
+//斐波那契数列（返回第几位） 递推法
 function fibonacci(n) {
     let first = 1;
     let second = 1;
@@ -35,10 +35,33 @@ function fibonacci(n) {
         first = second;
         second = third;
     }
-    if (n === 1 || n === 2) {
-        return 1;
+    return n === 1 || n === 2 ? 1 : third;
+}
+
+//斐波那契数列（返回前 n 位）
+function fibonacci1(n) {
+    let arr = []
+    let first = 1
+    let second = 1
+    let third
+    if (n <= 2) {
+        for (let i = 0; i < n; i++) {
+            arr.push(1)
+        }
+        return arr
+    } else {
+        for (let i = 0; i < 2; i++) {
+            arr.push(1)
+        }
+        for (let i = 2; i < n; i++) {
+            third = first + second;
+            arr.push(third)
+            first = second;
+            second = third;
+
+        }
+        return arr
     }
-    return third;
 }
 
 //防抖
