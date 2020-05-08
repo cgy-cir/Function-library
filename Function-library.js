@@ -64,6 +64,14 @@ function fibonacci1(n) {
     }
 }
 
+
+//call
+Function.prototype.call1 = function (obj) {
+    obj.fn = this
+    obj.fn()
+    delete obj.fn
+}
+
 //防抖
 function debounce(func, wait) {
     let timeout;
@@ -114,6 +122,18 @@ function inherit(origin, target) {
     target.prototype = new F();
     target.prototype.constructor = target;
 }
+
+var obj = {
+    a: 1,
+    b: function () {
+        console.log(this.c);
+    }
+}
+Object.prototype.c = 2
+obj.b()
+console.log(obj.c);
+
+
 
 //浅复制
 function shallowCopy(obj) {
