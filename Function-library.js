@@ -123,15 +123,7 @@ function inherit(origin, target) {
     target.prototype.constructor = target;
 }
 
-var obj = {
-    a: 1,
-    b: function () {
-        console.log(this.c);
-    }
-}
-Object.prototype.c = 2
-obj.b()
-console.log(obj.c);
+
 
 
 
