@@ -123,8 +123,18 @@ function inherit(origin, target) {
     target.prototype.constructor = target;
 }
 
-
-
+//call
+Function.prototype.call2 = function (target) {
+    let context = target || window;
+    context.fn = this;
+    let arr = [];
+    for (let i = 1; i < arguments.length; i++) {
+        arr.push(arguments[i]);
+    }
+    let res = context.fn(...arr);
+    delete context.fn;
+    return res;
+};
 
 
 //浅复制
@@ -132,7 +142,9 @@ function shallowCopy(obj) {
     if (obj !== null && typeof obj == 'object') {
         var newObj = obj instanceof Array ? [] : {};
         for (let key in obj) {
-            newObj[key] = obj[key]
+            if (obj.hasOwnProperty(key)) {
+                newObj[key] = obj[key]
+            }
         }
     }
     return newObj
@@ -156,12 +168,27 @@ function deepCopy(obj) {
 }
 
 //数组去重
-function unique(arr) {
-    let res = arr.filter((item, index, array) => {
+function unique1(arr) {
+    let res = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (res.indexOf(arr[i]) === -1) {
+            res.push(arr[i]);
+        }
+    }
+    return res;
+}
+
+function unique2(arr) {
+    let res = arr.filter((item, index) => {
         return arr.indexOf(item) == index
     })
     return res
 }
+
+let unique3 = arr => [...new Set(arr)]
+
+
+
 
 // 手写数组方法
 // push
@@ -216,7 +243,7 @@ Array.prototype.reverse1 = function () {
 
 // forEach
 Array.prototype.forEach1 = function (fn, context) {
-    var _this = context ? context : window;
+    var _this = context || window;
     for (let i = 0; i < this.length; i++) {
         fn.call(_this, this[i], i, this);
     }
